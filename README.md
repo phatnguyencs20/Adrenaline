@@ -28,3 +28,8 @@ The `Button` directory does not contain any HTML or CSS files because in a React
 
 The `api.js` file is a common way to connect a React Native front-end application to a back-end API or server. The `api.js` module encapsulates the logic for making HTTP requests to the back-end API and handling the responses, so that other parts of the application can use the API without having to worry about the implementation details. By using a module like `api.js`, you can keep the API code organized and modular, and make it easier to switch between different back-end APIs or servers if needed.
 
+## Note about the `helpers.js` file
+
+The `helpers.js` file is typically used for utility functions or helper functions that are specific to a certain part of the application. These functions might be used for things like parsing data from an API response, manipulating objects or arrays, or calculating values for a specific component or screen.
+
+By keeping these utility functions in a separate file, you can keep your code organized and modular, and make it easier to reuse the same functions across different parts of the application.
