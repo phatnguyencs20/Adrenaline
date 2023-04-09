@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Provider as PaperProvider } from 'react-native-paper';
+
+import Bedroom from "./screens/Bedroom";
+import FaceRecognition from "./screens/FaceRecognition";
+import Home from "./screens/Home";
+import Login from "./screens/Login";
+import Profile from "./screens/Profile";
+import Setting from "./screens/Setting";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Testing expo project</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <Profile />
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
