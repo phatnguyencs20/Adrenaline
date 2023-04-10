@@ -3,7 +3,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const user = require('./routes/user');
-const house = require('./routes/house');
 
 const app = express();
 const port = process.env.PORT || 8888;
@@ -11,7 +10,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/', user);
-app.use('/', house);
 
 const url = process.env.MONGODB_URL;
 mongoose.connect(url);
