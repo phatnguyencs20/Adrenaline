@@ -22,7 +22,7 @@ export default function App() {
   }, [isDarkMode]);
   return (
     <PaperProvider theme={theme}>
-      <Setting isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <NavBar/>
     </PaperProvider>
   );
 }

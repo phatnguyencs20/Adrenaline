@@ -13,7 +13,6 @@ import {
 
 //import data
 import { fvalue } from '../../mockup-data/fan.js';
-import { lvalue } from '../../mockup-data/light.js';
 
 //re-usable components
 import LightSwitch from "../../components/LightSwitch";
@@ -28,8 +27,8 @@ const LivingRoom = () => {
         <View style={styles.container}>
             {/* Fan card */}
             <Card style={styles.card} >
-                <List.Section>
-                    <List.Subheader style={styles.cardText}>        Fan control        </List.Subheader>
+                <List.Section style={{ marginTop: 10 }}>
+                    <List.Subheader style={styles.cardText}>Fan</List.Subheader>
                     <List.Item
                         title="Tempature"
                         left={() => <List.Icon icon="temperature-celsius" />}
@@ -54,7 +53,7 @@ const LivingRoom = () => {
             {/* Light card */}
             <Card style={styles.lcard} >
                 <List.Section>
-                    <List.Subheader style={styles.cardText}>        Light control        </List.Subheader>
+                    <List.Subheader style={styles.cardText}>Light</List.Subheader>
                     <List.Item
                         title="Light 1"
                         left={() => <List.Icon icon="lightbulb" />}
@@ -79,20 +78,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     card: {
+        padding: 10,
         width: width * 0.9,
-        height: height * 0.4,
+        height: height * 0.35,
         margin: 10,
         borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     lcard: {
+        padding: 10,
         width: width * 0.9,
         height: height * 0.3,
         margin: 10,
         borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     cardText: {
         fontSize: 20,
@@ -100,9 +97,6 @@ const styles = StyleSheet.create({
     },
     cardText1: {
         fontSize: 15,
-    },
-    List: {
-        width: width * 0.75,
     },
 });
 

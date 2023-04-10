@@ -35,9 +35,7 @@ const FanSwitch = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 0,
     },
 });
 
