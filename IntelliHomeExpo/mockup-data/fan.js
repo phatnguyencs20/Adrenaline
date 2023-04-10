@@ -9,4 +9,9 @@ export const fvalue = [
         humid: '30%',
         temp: 29,
     },
+    {
+        name: 'fan3',
+        humid: '40%',
+        temp: 30,
+    },
 ];
