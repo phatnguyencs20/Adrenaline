@@ -10,18 +10,22 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    name: {
+    firstName: {
         type: String,
         required: true,
     },
-    email: {
+    lastName: {
         type: String,
         required: true,
     },
-    house: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'House',
-    }
+    adafruitIOUsername: {
+        type: String,
+        required: true,
+    },
+    adafruitIOKey: {
+        type: String,
+        required: true,
+    },
 });
 
 module.exports = mongoose.model('User', UserSchema);
