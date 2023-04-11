@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { List, Divider, Button, useTheme } from 'react-native-paper';
 
 const SettingsScreen = ({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) => {
@@ -16,7 +17,7 @@ const SettingsScreen = ({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; se
     };
 
     return (
-        <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
             <List.Section style={{ marginTop: 10}}>
                 <List.Subheader>Account</List.Subheader>
                 <List.Item
@@ -52,7 +53,7 @@ const SettingsScreen = ({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; se
             <Button mode="contained" onPress={handleLogout}>
                 Logout
             </Button>
-        </View>
+        </SafeAreaView>
     );
 };
 

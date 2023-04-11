@@ -10,6 +10,7 @@ import { Button, Text } from 'react-native-paper';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { Entypo } from '@expo/vector-icons';
+import Icon from 'react-native-paper/lib/typescript/src/components/Icon';
 
 const FaceRecognition = () => {
   const [type, setType] = useState(CameraType.front);//dont toouch this
@@ -51,9 +52,8 @@ const FaceRecognition = () => {
         >
         </Camera>
         <View>
-          <TouchableOpacity onPress={takePicture} style={styles.button}>
-            <Entypo name={'camera'} size={28} color={'#f1f1f1'} /><Text style={styles.content}> Take a picture to unlock</Text>
-          </TouchableOpacity>
+          <Button mode='contained' onPress={takePicture}>Take</Button>
+          <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)}>Flip</Button>
         </View>
       </View>
     </View>
@@ -77,13 +77,14 @@ const styles = StyleSheet.create({
   },
   camera: {
     height: '65%',
-    width: '85%',
+    width: '80%',
     borderRadius: 20,
   },
   capture: {},
   button: {
     flexDirection: 'row',
     height: 40,
+    width: '80%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#aba6a4',
@@ -93,7 +94,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: '#f1f1f1',
-    marginLeft: 10,
   },
 });
 

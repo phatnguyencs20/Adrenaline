@@ -18,12 +18,14 @@ const SignUpScreen = () => {
         <View style={styles.container}>
             <Text variant='headlineLarge'>Sign Up</Text>
             <TextInput
+                mode='outlined'
                 label="Username"
                 value={username}
                 style={styles.inputField}
                 onChangeText={setUsername}
             />
             <TextInput
+            mode='outlined'
                 label="Password"
                 value={password}
                 style={styles.inputField}
@@ -32,12 +34,14 @@ const SignUpScreen = () => {
             />
             <View style={{ flexDirection: 'row', width: '90%' }}>
                 <TextInput
+                mode='outlined'
                     label="First Name"
                     value={firstName}
                     style={[styles.inputField, { flex: 1, marginRight: 5 }]}
                     onChangeText={setFirstName}
                 />
                 <TextInput
+                mode='outlined'
                     label="Last Name"
                     value={lastName}
                     style={[styles.inputField, { flex: 1, marginLeft: 5 }]}
@@ -46,12 +50,14 @@ const SignUpScreen = () => {
             </View>
 
             <TextInput
+            mode='outlined'
                 label="Adafuit IO Username"
                 value={adafruitIOUsername}
                 style={styles.inputField}
                 onChangeText={setAdafruitIOUsername}
             />
             <TextInput
+            mode='outlined'
                 label="Adafuit IO Key"
                 value={adafruitIOKey}
                 style={styles.inputField}
