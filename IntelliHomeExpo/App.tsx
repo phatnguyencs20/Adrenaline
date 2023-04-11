@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider, DefaultTheme, MD3DarkTheme } from 'react-native-paper';
 
-import { StatusBar } from "expo-status-bar";
-
-import Bedroom from "./screens/Bedroom";
-import FaceRecognition from "./screens/FaceRecognition";
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import Profile from "./screens/Profile";
-import Setting from "./screens/Setting";
-import AppBar from "./components/Appbar";
-import NavBar from "./components/NavBar";
 import Signup from "./screens/Signup";
+import Login from "./screens/Login";
+import Home from "./screens/Home";
+import Setting from "./screens/Setting";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -20,9 +17,23 @@ export default function App() {
   useEffect(() => {
     setTheme(isDarkMode ? MD3DarkTheme : DefaultTheme);
   }, [isDarkMode]);
+
   return (
     <PaperProvider theme={theme}>
-      <Setting isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Setting">
+            {props => <Setting {...props} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
   );
 }

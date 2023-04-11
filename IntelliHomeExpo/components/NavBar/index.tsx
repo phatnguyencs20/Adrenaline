@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
 
-import LivingRoom from "../../screens/Home";
-import Bedroom from "../../screens//Bedroom";
-import FaceRecognition from "../../screens/FaceRecognition";
+import LivingRoom from "../LivingRoom";
+import Bedroom from "../Bedroom";
+import FaceRecognition from "../FaceRecognition";
 
 const LivingRoomRoute = () => <LivingRoom />;
 const BedroomRoute = () => <Bedroom />;
@@ -25,6 +25,8 @@ const NavBar = () => {
 
     return (
         <BottomNavigation
+            shifting={true}
+            sceneAnimationEnabled={true}
             navigationState={{ index, routes }}
             onIndexChange={setIndex}
             renderScene={renderScene}
