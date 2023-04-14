@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { TextInput, Button, Text, useTheme } from 'react-native-paper';
+import { TextInput, Button, Text, TouchableRipple, useTheme } from 'react-native-paper';
 
-export default function LoginPage() {
+function LoginPage({ navigation }: any) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { colors } = useTheme();
 
     const handleLogin = () => {
-        // Your login logic here
+        navigation.navigate('Home');
     };
 
     return (
@@ -37,11 +37,9 @@ export default function LoginPage() {
             </View>
             <View style={styles.createAccountContainer}>
                 <Text style={styles.createAccountText}>Don't have an account?</Text>
-                <Text style={styles.createAccountLink}>Create one now</Text>
-            </View>
-            <View style={styles.footer}>
-                {/* Add links to other pages or social media handles here */}
-                <Text style={styles.footerText}>© 2023 My App, Inc. All rights reserved.</Text>
+                <TouchableRipple onPress={() => { navigation.navigate('Signup') }}>
+                    <Text style={styles.createAccountLink}>Create one now</Text>
+                </TouchableRipple>
             </View>
         </View>
     );
@@ -98,3 +96,5 @@ const styles = StyleSheet.create({
         color: '#777',
     },
 });
+
+export default LoginPage;
