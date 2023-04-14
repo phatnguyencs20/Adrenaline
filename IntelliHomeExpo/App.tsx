@@ -34,6 +34,7 @@ export default function App() {
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
+      {/* <Login /> */}
     </PaperProvider>
   );
 }
