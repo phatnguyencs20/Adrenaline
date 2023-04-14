@@ -2,77 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput, Button, Text, Snackbar, TouchableRipple, useTheme } from 'react-native-paper';
 
-const endpoint = 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-zcxbi/endpoint/data/v1/action/findOne'
-const apiKey = 'BH4ZZFoMj1z7yc6Kjw1jPSJMhC3Ufv7dhAILm5XNlyQr3gKNTPLsGJWSRbiTmpuD'
-
-import axios, { AxiosRequestConfig } from 'axios';
-
-interface Filter {
-    username: string;
-    password: string;
-}
-
-interface Projection {
-    _id: number;
-    firstName: number;
-    adafruitIOUsername: number;
-    adafruitIOKey: number;
-}
-
-interface RequestBody {
-    collection: string;
-    database: string;
-    dataSource: string;
-    projection: Projection;
-    filter: Filter;
-}
-
-interface ResponseData {
-    document: {
-        _id: string;
-        firstName: string;
-        adafruitIOUsername: string;
-        adafruitIOKey: string;
-    };
-}
-
-function getUserDataFromApi(username: string, password: string): Promise<ResponseData> {
-    const requestBody: RequestBody = {
-        collection: 'users',
-        database: 'test',
-        dataSource: 'Lambda',
-        projection: {
-            _id: 1,
-            firstName: 1,
-            adafruitIOUsername: 1,
-            adafruitIOKey: 1
-        },
-        filter: {
-            username: username,
-            password: password,
-        }
-    };
-
-    const config: AxiosRequestConfig = {
-        method: 'post',
-        url: endpoint,
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Request-Headers': '*',
-            'api-key': apiKey,
-        },
-        data: JSON.stringify(requestBody),
-    };
-
-    return axios(config)
-        .then((response) => {
-            console.log(JSON.stringify(response.data));
-            return response.data;
-        })
-        .catch((error) => {
-            throw error;
-        });
-}
+import { getUserDataFromApi } from '../../utils/api';
 
 function LoginPage({ navigation }: any) {
     const [email, setEmail] = useState('');
@@ -89,8 +19,11 @@ function LoginPage({ navigation }: any) {
         getUserDataFromApi(email, password)
             .then((response) => {
                 // If the authentication was successful, navigate to the Home screen
-                if (response.document !== null)
+                if (response.document !== null) {
                     navigation.navigate('Home');
+                    setEmail('');
+                    setPassword('');
+                }
                 else
                     setSnackbarVisible(true);
             })
@@ -101,10 +34,9 @@ function LoginPage({ navigation }: any) {
             });
     };
 
-
     return (
         <View style={styles.container}>
-            <Text variant='headlineLarge' style={{ color: colors.primary, margin: '5%' }}>Welcome back!</Text>
+            <Text variant='displayMedium' style={{ color: colors.primary, margin: '5%', fontWeight: '600', }}>Welcome back!</Text>
             <View style={styles.forgotPasswordContainer}>
                 <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
             </View>
@@ -113,6 +45,7 @@ function LoginPage({ navigation }: any) {
                     label="Email"
                     value={email}
                     onChangeText={setEmail}
+                    autoCapitalize="none"
                     style={styles.input}
                 />
                 <TextInput
@@ -120,9 +53,10 @@ function LoginPage({ navigation }: any) {
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
+                    autoCapitalize="none"
                     style={styles.input}
                 />
-                <Button mode="contained" onPress={handleLogin} style={styles.button}>
+                <Button mode="contained" onPress={handleLogin}>
                     Log in
                 </Button>
             </View>
@@ -136,8 +70,9 @@ function LoginPage({ navigation }: any) {
                 visible={snackbarVisible}
                 onDismiss={handleSnackbarDismiss}
                 duration={5000}
+                onIconPress={handleSnackbarDismiss}
             >
-                Invalid credentials, please try again
+                Invalid credentials, please try again!
             </Snackbar>
         </View>
     );
@@ -148,7 +83,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        padding: 25,
     },
     forgotPasswordContainer: {
         alignSelf: 'flex-end',
@@ -165,9 +100,6 @@ const styles = StyleSheet.create({
     },
     input: {
         marginBottom: 10,
-    },
-    button: {
-        width: '100%',
     },
     createAccountContainer: {
         flexDirection: 'row',
