@@ -87,6 +87,8 @@ function sendToAdafruitIOFeed(feedKey, AIOUsername, AIOKey, value) {
         });
 }
 
+// export { getUserDataFromApi, getAdafruitIOData, sendToAdafruitIOFeed };
+
 // Sample functions' calls
 // getAdafruitIOData(feedKey, AIOUsername, AIOKey)
 //     .then(data => {
@@ -97,3 +99,10 @@ function sendToAdafruitIOFeed(feedKey, AIOUsername, AIOKey, value) {
 //     });
 // sendToAdafruitIOFeed(feedKey, AIOUsername, AIOKey, 42);
 // sendToAdafruitIOFeed("miniled", AIOUsername, AIOKey, 1);
+
+getUserDataFromApi('phatnt', 'password')
+  .then(() => {
+  })
+  .catch((error) => {
+    // handle error here
+  });
