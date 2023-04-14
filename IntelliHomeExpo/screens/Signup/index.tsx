@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TextInput, Button, Text } from 'react-native-paper';
+import { TextInput, Button, Text, useTheme } from 'react-native-paper';
 
 const SignUpScreen = ({navigation}: any) => {
     const [username, setUsername] = useState('');
@@ -9,6 +9,7 @@ const SignUpScreen = ({navigation}: any) => {
     const [lastName, setLastName] = useState('');
     const [adafruitIOUsername, setAdafruitIOUsername] = useState('');
     const [adafruitIOKey, setAdafruitIOKey] = useState('');
+    const { colors } = useTheme();
 
     const handleSignUp = () => {
         navigation.navigate('Login');
@@ -16,7 +17,7 @@ const SignUpScreen = ({navigation}: any) => {
 
     return (
         <View style={styles.container}>
-            <Text variant='headlineLarge'>Sign Up</Text>
+                        <Text variant='displayMedium' style={{ color: colors.primary, margin: '5%', fontWeight: '600', }}>Sign up</Text>
             <TextInput
                 label="Username"
                 value={username}
