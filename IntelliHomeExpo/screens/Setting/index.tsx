@@ -3,12 +3,12 @@ import { View, StyleSheet, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { List, Divider, Button, useTheme } from 'react-native-paper';
 
-const SettingsScreen = ({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) => {
+const SettingsScreen = ({navigation, isDarkMode, setIsDarkMode }: {navigation: any; isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) => {
     const { colors } = useTheme();
     const [backgroundColor, setBackgroundColor] = useState(colors.background);
 
     const handleLogout = () => {
-        // Code to handle logout
+        navigation.navigate('Login');
     };
 
     const toggleDarkMode = () => {

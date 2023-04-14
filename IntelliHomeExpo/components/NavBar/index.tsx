@@ -13,19 +13,19 @@ const NavBar = () => {
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
         { key: 'livingRoom', title: 'Living Room', focusedIcon: 'desk' },
-        { key: 'bedroom', title: 'Bedroom', focusedIcon: 'sleep' },
+        // { key: 'bedroom', title: 'Bedroom', focusedIcon: 'sleep' },
         { key: 'faceRecognition', title: 'Face Recognition', focusedIcon: 'camera' },
     ]);
 
     const renderScene = BottomNavigation.SceneMap({
         livingRoom: LivingRoomRoute,
-        bedroom: BedroomRoute,
+        // bedroom: BedroomRoute,
         faceRecognition: FaceRecognitionRoute,
     });
 
     return (
         <BottomNavigation
-            shifting={true}
+            // shifting={true}
             sceneAnimationEnabled={true}
             navigationState={{ index, routes }}
             onIndexChange={setIndex}
