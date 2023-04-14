@@ -8,10 +8,10 @@ import NavBar from '../../components/NavBar';
 
 const Home = ({ navigation }: any) => {
     return (
-        <SafeAreaView style={{ height: '100%' }}>
+        <View style={{flex: 1}}>
             <AppBar navigation={navigation} />
             <NavBar />
-        </SafeAreaView>
+        </View>
     );
 };
 

@@ -12,8 +12,9 @@ import * as MediaLibrary from 'expo-media-library';
 import { Entypo } from '@expo/vector-icons';
 import Icon from 'react-native-paper/lib/typescript/src/components/Icon';
 
+
 const FaceRecognition = () => {
-  const [type, setType] = useState(CameraType.front);//dont toouch this
+  const [type, setType] = useState(CameraType.front);
   const [permission, requestPermission] = useState(false);
   const [image, setImage] = useState(null);
   const cameraRef = useRef(null);
@@ -31,7 +32,7 @@ const FaceRecognition = () => {
   };
 
   const takePicture = async () => {
-    if (cameraRef) {
+    if (cameraRef.current) {
       try {
         const data = await cameraRef.current.takePictureAsync();
         console.log(data);
@@ -44,18 +45,17 @@ const FaceRecognition = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.rec}>
         <Camera
           style={styles.camera}
           type={type}
           ref={cameraRef}
         >
         </Camera>
-        <View>
-          <Button mode='contained' onPress={takePicture}>Take</Button>
-          <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)}>Flip</Button>
+        <View style={styles.buttonsContainer}>
+          <Button mode='contained' onPress={takePicture} style={styles.button}>Take</Button>
+          <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}>Flip</Button>
         </View>
-      </View>
+
     </View>
   );
 };
@@ -68,32 +68,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-  },
-  rec: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
   },
   camera: {
-    height: '65%',
+    height: '80%',
     width: '80%',
-    borderRadius: 20,
+    borderRadius: 25,
+    overflow: 'hidden',
   },
   capture: {},
-  button: {
+  buttonsContainer: {
     flexDirection: 'row',
-    height: 40,
+    marginTop: 20,
+    marginBottom: 20,
+    marginHorizontal: 10,
     width: '80%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#aba6a4',
-    borderRadius: 10,
   },
-  content: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#f1f1f1',
+  button: {
+    flex: 1,
+    marginHorizontal: 5,
   },
 });
 
