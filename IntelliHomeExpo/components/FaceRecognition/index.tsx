@@ -9,14 +9,12 @@ import {
 import { Button, Text } from 'react-native-paper';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-import { Entypo } from '@expo/vector-icons';
-import Icon from 'react-native-paper/lib/typescript/src/components/Icon';
-
 
 const FaceRecognition = () => {
+  const [image, setImage] = useState(null);
+
   const [type, setType] = useState(CameraType.front);
   const [permission, requestPermission] = useState(false);
-  const [image, setImage] = useState(null);
   const cameraRef = useRef(null);
 
   useEffect(() => {
@@ -45,16 +43,16 @@ const FaceRecognition = () => {
 
   return (
     <View style={styles.container}>
-        <Camera
-          style={styles.camera}
-          type={type}
-          ref={cameraRef}
-        >
-        </Camera>
-        <View style={styles.buttonsContainer}>
-          <Button mode='contained' onPress={takePicture} style={styles.button}>Take</Button>
-          <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}>Flip</Button>
-        </View>
+      <Camera
+        style={styles.camera}
+        type={type}
+        ref={cameraRef}
+      >
+      </Camera>
+      <View style={styles.buttonsContainer}>
+        <Button mode='contained' onPress={takePicture} style={styles.button}>Take</Button>
+        <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}>Flip</Button>
+      </View>
 
     </View>
   );
@@ -76,7 +74,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     overflow: 'hidden',
   },
-  capture: {},
   buttonsContainer: {
     flexDirection: 'row',
     marginTop: 20,

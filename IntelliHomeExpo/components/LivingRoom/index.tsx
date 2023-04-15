@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import {
     View,
     Dimensions,
@@ -11,18 +12,19 @@ import {
     Text,
 } from 'react-native-paper';
 
-//import data
 import { fvalue } from '../../mockup-data/fan.js';
 
-//re-usable components
-import LightSwitch from "../LightSwitch/index.js";
+import { UserState } from '../../store';
 import FanSwitch from "../FanSwitch/index.js";
+import LightSwitch from "../LightSwitch/index.js";
 
-//set const height and width of devices
 const { width, height } = Dimensions.get('window');
 
-//create Living Room component
 const LivingRoom = () => {
+    const user = useSelector((state: { app: { user: UserState } }) => state.app.user);
+    const AIOUsername = user.adafruitIOUsername;
+    const AIOKey = user.adafruitIOKey;
+
     return (
         <View style={styles.container}>
             {/* Fan card */}

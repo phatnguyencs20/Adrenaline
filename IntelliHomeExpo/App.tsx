@@ -1,10 +1,10 @@
+import { Provider } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider, DefaultTheme, MD3DarkTheme } from 'react-native-paper';
-import { Provider } from 'react-redux';
-import { store } from './store';
 
+import { store } from './store';
 import Signup from "./screens/Signup";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
@@ -40,4 +40,4 @@ export default function App() {
       </Provider>
     </PaperProvider>
   );
-}
+};
