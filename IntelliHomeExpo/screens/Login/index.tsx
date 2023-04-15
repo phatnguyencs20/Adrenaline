@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { TextInput, Button, Text, Snackbar, TouchableRipple, useTheme } from 'react-native-paper';
+import { StyleSheet, View, Image } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store';
+
+import { TextInput, Button, Text, Snackbar, TouchableRipple, useTheme, } from 'react-native-paper';
 
 import { getUserDataFromApi } from '../../utils/api';
 
 function LoginPage({ navigation }: any) {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { colors } = useTheme();
@@ -20,12 +24,15 @@ function LoginPage({ navigation }: any) {
             .then((response) => {
                 // If the authentication was successful, navigate to the Home screen
                 if (response.document !== null) {
+                    // dispatch the login action with the user information
+                    dispatch(login(response.document));
+
                     navigation.navigate('Home');
                     setEmail('');
                     setPassword('');
-                }
-                else
+                } else {
                     setSnackbarVisible(true);
+                }
             })
             .catch((error) => {
                 // If there was an error, log it to the console
@@ -36,29 +43,35 @@ function LoginPage({ navigation }: any) {
 
     return (
         <View style={styles.container}>
-            <Text variant='displayMedium' style={{ color: colors.primary, margin: '5%', fontWeight: '600', }}>Welcome back!</Text>
-            <View style={styles.forgotPasswordContainer}>
-                <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-            </View>
-            <View style={styles.formContainer}>
-                <TextInput
-                    label="Email"
-                    value={email}
-                    onChangeText={setEmail}
-                    autoCapitalize="none"
-                    style={styles.input}
+            <View style={styles.smaller}>
+                <Image
+                    source={require('../../assets/pana.png')}
+                    style={styles.img}
                 />
-                <TextInput
-                    label="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                    autoCapitalize="none"
-                    style={styles.input}
-                />
-                <Button mode="contained" onPress={handleLogin}>
-                    Log in
-                </Button>
+                <Text variant='displayMedium' style={{ color: colors.primary, margin: '5%', fontWeight: '600', }}>Welcome back!</Text>
+                <View style={styles.forgotPasswordContainer}>
+                    <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+                </View>
+                <View style={styles.formContainer}>
+                    <TextInput
+                        label="Email"
+                        value={email}
+                        onChangeText={setEmail}
+                        autoCapitalize="none"
+                        style={styles.input}
+                    />
+                    <TextInput
+                        label="Password"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                        autoCapitalize="none"
+                        style={styles.input}
+                    />
+                    <Button mode="contained" onPress={handleLogin}>
+                        Log in
+                    </Button>
+                </View>
             </View>
             <View style={styles.createAccountContainer}>
                 <Text style={styles.createAccountText}>Don't have an account?</Text>
@@ -83,7 +96,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    smaller: {
+        flex: .8,
+        alignItems: 'center',
         padding: 25,
+        width: '100%',
+    },
+    img: {
+        width: '80%',
+        height: '30%',
     },
     forgotPasswordContainer: {
         alignSelf: 'flex-end',

@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { List, Divider, Button, useTheme } from 'react-native-paper';
+import { logout } from '../../store';
+import { useDispatch } from 'react-redux';
 
 const SettingsScreen = ({navigation, isDarkMode, setIsDarkMode }: {navigation: any; isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) => {
     const { colors } = useTheme();
+    const dispatch = useDispatch();
     const [backgroundColor, setBackgroundColor] = useState(colors.background);
 
     const handleLogout = () => {
+        dispatch(logout());
+
+        if (isDarkMode) {
+            setIsDarkMode(false);
+        }
         navigation.navigate('Login');
     };
 

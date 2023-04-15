@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider, DefaultTheme, MD3DarkTheme } from 'react-native-paper';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 import Signup from "./screens/Signup";
 import Login from "./screens/Login";
@@ -20,20 +22,22 @@ export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Signup" component={Signup}  />
-          <Stack.Screen name="Login" component={Login} options={{gestureEnabled: false}} />
-          <Stack.Screen name="Home" component={Home} options={{gestureEnabled: false}} />
-          <Stack.Screen name="Setting">
-            {props => <Setting {...props} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
-          </Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <Stack.Screen name="Signup" component={Signup} />
+            <Stack.Screen name="Login" component={Login} options={{ gestureEnabled: false }} />
+            <Stack.Screen name="Home" component={Home} options={{ gestureEnabled: false }} />
+            <Stack.Screen name="Setting">
+              {props => <Setting {...props} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
+            </Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </PaperProvider>
   );
 }
