@@ -62,30 +62,9 @@ function getAdafruitIOData(feedKey, AIOUsername, AIOKey) {
         });
 }
 
-function sendToAdafruitIOFeed(feedKey, AIOUsername, AIOKey, value) {
-    const data = {
-        value: value
-    };
 
-    const config = {
-        method: 'post',
-        url: `https://io.adafruit.com/api/v2/${AIOUsername}/feeds/${feedKey}/data`,
-        headers: {
-            'Content-Type': 'application/json',
-            'X-AIO-Key': AIOKey,
-        },
-        data: JSON.stringify(data),
-    };
 
-    return axios(config)
-        .then(response => {
-            console.log(`Value ${value} sent to feed ${feedKey}`);
-        })
-        .catch(error => {
-            console.error(`Error sending value to feed ${feedKey}: ${error}`);
-            throw error;
-        });
-}
+
 
 // export { getUserDataFromApi, getAdafruitIOData, sendToAdafruitIOFeed };
 

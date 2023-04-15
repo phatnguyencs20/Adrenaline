@@ -1,7 +1,11 @@
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+
 const endpoint = 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-zcxbi/endpoint/data/v1/action/findOne'
 const apiKey = 'BH4ZZFoMj1z7yc6Kjw1jPSJMhC3Ufv7dhAILm5XNlyQr3gKNTPLsGJWSRbiTmpuD'
 
-import axios, { AxiosRequestConfig } from 'axios';
+const feedKey = "humidity";
+const AIOUsername = "phatnt";
+const AIOKey = "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT";
 
 interface Filter {
     username: string;
@@ -70,4 +74,53 @@ function getUserDataFromApi(username: string, password: string): Promise<Respons
         });
 }
 
-export { getUserDataFromApi };
+interface AdafruitIOData {
+    id: number;
+    value: string;
+    feed_id: number;
+    created_at: string;
+}
+
+function getAdafruitIOData(feedKey: string, AIOUsername: string, AIOKey: string): Promise<AdafruitIOData[]> {
+    const endpoint = `https://io.adafruit.com/api/v2/${AIOUsername}/feeds/${feedKey}/data`;
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-AIO-Key': AIOKey,
+    };
+
+    return axios.get<AdafruitIOData[]>(endpoint, { headers })
+        .then((response: AxiosResponse<AdafruitIOData[]>) => {
+            return response.data;
+        })
+        .catch((error: Error) => {
+            console.error(error);
+            throw error;
+        });
+}
+
+function sendToAdafruitIOFeed(feedKey: string, AIOUsername: string, AIOKey: string, value: string): Promise<void> {
+    const data = {
+        value: value
+    };
+
+    const config = {
+        method: 'post',
+        url: `https://io.adafruit.com/api/v2/${AIOUsername}/feeds/${feedKey}/data`,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-AIO-Key': AIOKey,
+        },
+        data: JSON.stringify(data),
+    };
+
+    return axios(config)
+        .then(response => {
+            console.log(`Value ${value} sent to feed ${feedKey}`);
+        })
+        .catch(error => {
+            console.error(`Error sending value to feed ${feedKey}: ${error}`);
+            throw error;
+        });
+}
+
+export { getUserDataFromApi, getAdafruitIOData, sendToAdafruitIOFeed };
