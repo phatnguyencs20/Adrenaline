@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store';
-
+import { StyleSheet, View, Image } from 'react-native';
 import { TextInput, Button, Text, Snackbar, TouchableRipple, useTheme, } from 'react-native-paper';
 
+import { login } from '../../store';
+import Welcome from '../../components/Welcome';
 import { getUserDataFromApi } from '../../utils/api';
 
 function LoginPage({ navigation }: any) {
+    const { colors } = useTheme();
     const dispatch = useDispatch();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { colors } = useTheme();
-
     const [snackbarVisible, setSnackbarVisible] = useState(false);
+
     const handleSnackbarDismiss = () => {
         setSnackbarVisible(false);
     };
@@ -26,7 +27,6 @@ function LoginPage({ navigation }: any) {
                 if (response.document !== null) {
                     // dispatch the login action with the user information
                     dispatch(login(response.document));
-
                     navigation.navigate('Home');
                     setEmail('');
                     setPassword('');
@@ -48,7 +48,13 @@ function LoginPage({ navigation }: any) {
                     source={require('../../assets/pana.png')}
                     style={styles.img}
                 />
-                <Text variant='displayMedium' style={{ color: colors.primary, margin: '5%', fontWeight: '600', }}>Welcome back!</Text>
+                <Text
+                    variant='displaySmall'
+                    style={{ color: colors.primary, margin: '5%', fontWeight: '600', }}
+                >
+                    <Welcome />
+                </Text>
+
                 <View style={styles.forgotPasswordContainer}>
                     <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
                 </View>

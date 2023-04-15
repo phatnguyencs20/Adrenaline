@@ -23,7 +23,7 @@ const FanSwitch = () => {
                         value: '50',
                         label: 'Mid' 
                     },
-                    { 
+                    {
                         value: '100',
                         label: 'High' 
                     },
