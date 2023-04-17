@@ -96,3 +96,5 @@ const sendPredictionRequest = async (imageUri: string): Promise<number> => {
 };
 
 export { KNN, sendPredictionRequest };
+
+export const model = new KNN(9);
