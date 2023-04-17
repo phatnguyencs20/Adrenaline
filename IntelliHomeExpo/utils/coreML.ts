@@ -1,3 +1,6 @@
+import { AxiosResponse } from 'axios';
+import axios from 'axios';
+
 class KNN {
     private datapoints: number[][];
     private k: number;
@@ -41,19 +44,19 @@ class KNN {
         this.addElement(element);
     }
 
-    manhattanDistance (a: number[], b: number[]): number {
+    manhattanDistance(a: number[], b: number[]): number {
         const dt = Math.abs(a[0] - b[0]) / (this.tempMax - this.tempMin);
         const dh = Math.abs(a[1] - b[1]) / (this.humMax - this.humMin);
         return dt + dh;
     }
 
-    euclideanDistance (a: number[], b: number[]): number {
+    euclideanDistance(a: number[], b: number[]): number {
         const dt = Math.abs(a[0] - b[0]) / (this.tempMax - this.tempMin);
         const dh = Math.abs(a[1] - b[1]) / (this.humMax - this.humMin);
         return Math.sqrt(dt ** 2 + dh ** 2);
     }
 
-    predict (element: number[]): number {
+    predict(element: number[]): number {
         const distances = [];
         for (let i = 0; i < this.datapoints.length; i++) {
             distances.push([this.euclideanDistance(element, this.datapoints[i]), this.datapoints[i][2]]);
@@ -67,10 +70,29 @@ class KNN {
     }
 }
 
+// Define function to convert image to base64 string
+const convertImageToBase64 = async (imageUri: string): Promise<string> => {
+    const response = await fetch(imageUri);
+    const blob = await response.blob();
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    return new Promise<string>((resolve, reject) => {
+        reader.onloadend = () => {
+            const base64 = reader.result?.toString().split(',')[1];
+            if (base64) {
+                resolve(base64);
+            } else {
+                reject(new Error("Failed to convert image to base64"));
+            }
+        };
+    });
+};
 
+// Define function to send post request to Flask API
+const sendPredictionRequest = async (imageUri: string): Promise<number> => {
+    const base64Image = await convertImageToBase64(imageUri);
+    const response: AxiosResponse<number> = await axios.post('http://192.168.31.209:8000/predict', { image: base64Image });
+    return response.data;
+};
 
-var t = new KNN(5);
-console.log(t.getKnowledge());
-console.log(t.updateKnowledge([30, 70, 1]));
-console.log(t.getKnowledge());
-console.log(t.predict([30, 70]));
+export { KNN, sendPredictionRequest };
