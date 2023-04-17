@@ -67,6 +67,8 @@ class KNN {
     }
 }
 
+
+
 var t = new KNN(5);
 console.log(t.getKnowledge());
 console.log(t.updateKnowledge([30, 70, 1]));
