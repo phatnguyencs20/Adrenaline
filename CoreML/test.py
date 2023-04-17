@@ -5,15 +5,16 @@ import numpy as np
 import cv2
 
 # Load image
-img = cv2.imread('./data/test/TIN/20230413_161940.jpg')
+img = cv2.imread('./data/test/TIN/20230413_162149.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # Encode image to base64 string
-_, img_encoded = cv2.imencode('.png', img)
+_, img_encoded = cv2.imencode('.jpg', img)
 img_base64 = base64.b64encode(img_encoded).decode('utf-8')
 
 # Set up request payload
 payload = {'image': img_base64}
+print(payload)
 headers = {'Content-Type': 'application/json'}
 
 # Send POST request to server

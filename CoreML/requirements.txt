@@ -1,4 +1,7 @@
+Flask
 cv2
 numpy
+pillow
 tensorflow
-Flask
+keras_applications
+mtcnn
