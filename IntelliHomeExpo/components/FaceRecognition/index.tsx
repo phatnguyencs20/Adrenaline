@@ -40,11 +40,17 @@ const FaceRecognition = () => {
     if (cameraRef.current) {
       try {
         const data = await cameraRef.current.takePictureAsync();
-        console.log(data);
+        // console.log(data);
         setImage(data.uri);
       } catch (e) {
         console.log(e);
       }
+    }
+  };
+
+  const componentWillUnmount = () => {
+    if (cameraRef.current) {
+      cameraRef.current.pausePreview();
     }
   };
 
