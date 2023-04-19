@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Text } from 'react-native-paper';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
@@ -67,8 +69,8 @@ const FaceRecognition = () => {
       >
       </Camera>
       <View style={styles.buttonsContainer}>
-        <Button mode='contained' onPress={takePicture} style={styles.button}>Take</Button>
-        <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}>Flip</Button>
+        <Button mode='contained' onPress={takePicture} style={styles.button}><FontAwesome name="camera" size={15} color="white" />Take</Button>
+        <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}><MaterialCommunityIcons name="camera-flip" size={19} color="white" />Flip</Button>
         <Button mode='contained' onPress={predictImage} style={styles.button}>Predict</Button>
       </View>
 
