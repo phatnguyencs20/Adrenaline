@@ -6,10 +6,10 @@ import { getAdafruitIOData } from '../../utils/api';
 
 const Statistic = () => {
     // const [label, setLabel] = useState([]);
-    const [chart, setChart] = useState(<></>);
-
-    const draw_chart = (input: number[])=>{
-        setChart(
+    const [temperature, setTemper] = useState(<></>);
+    const [humid, setHumid] = useState(<></>);
+    const draw_temper = (input: number[])=>{
+        setTemper(
             <LineChart
                 data={{
                 labels: [],
@@ -48,7 +48,48 @@ const Statistic = () => {
         )
     }
 
+    const draw_humid = (input: number[])=>{
+        setHumid(
+            <LineChart
+                data={{
+                labels: [],
+                datasets: [
+                    {
+                    data: input
+                    }
+                ]
+                }}
+                width={Dimensions.get("window").width-40} // from react-native
+                height={220}
+                yAxisLabel=""
+                yAxisSuffix=" %"
+                yAxisInterval={9} // optional, defaults to 1
+                chartConfig={{
+                backgroundColor: "#AB5AE0",
+                backgroundGradientFrom: "#B589FA",
+                backgroundGradientTo: "#610DE2",
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                style: {
+                    borderRadius: 16
+                },
+                propsForDots: {
+                    r: "6",
+                    strokeWidth: "2",
+                    stroke: "#ffa726"
+                }
+                }}
+                style={{
+                marginVertical: 8,
+                borderRadius: 16
+                }}
+            />
+        )
+    }
+
     let data_temp: number[] = [];
+    let data_humid: number[] = [];
     useEffect(()=>{
         const intervalId = setInterval(() => {
             getAdafruitIOData("temperature", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
@@ -58,7 +99,17 @@ const Statistic = () => {
                         data_temp.splice(0);
                     }
                     console.log(data_temp);
-                    draw_chart(data_temp);
+                    draw_temper(data_temp);
+                })
+                .catch(err => {console.log(err)});
+            getAdafruitIOData("humidity", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
+                .then((res) =>{
+                    data_humid = [...data_humid, +res[0].value];
+                    if (data_humid.length >7) {
+                        data_humid.splice(0);
+                    }
+                    console.log(data_humid);
+                    draw_humid(data_humid);
                 })
                 .catch(err => {console.log(err)});
         }, 5000);
@@ -78,7 +129,9 @@ const Statistic = () => {
     return (
         <View style={styles.container}>
             <Text>Temperature</Text>
-            {chart}
+            {temperature}
+            <Text>Humidity</Text>
+            {humid}
         </View>
     )
 }
