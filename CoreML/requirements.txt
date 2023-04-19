@@ -1,7 +1,8 @@
 Flask
-cv2
+opencv-python
 numpy
 pillow
 tensorflow
 keras_applications
 mtcnn
+matplotlib
