@@ -50,15 +50,28 @@ const Statistic = () => {
 
     let data_temp: number[] = [];
     useEffect(()=>{
-        getAdafruitIOData("temperature", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
-            .then((res) =>{
-                console.log(res);
-                for (let i = 0; i < res.length; i++) {
-                    data_temp = [+res[i].value, ...data_temp];
-                }
-                console.log(data_temp);
-                draw_chart(data_temp);
-            })
+        const intervalId = setInterval(() => {
+            getAdafruitIOData("temperature", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
+                .then((res) =>{
+                    data_temp = [...data_temp, +res[0].value];
+                    if (data_temp.length >7) {
+                        data_temp.splice(0);
+                    }
+                    console.log(data_temp);
+                    draw_chart(data_temp);
+                })
+                .catch(err => {console.log(err)});
+        }, 5000);
+        return () => clearInterval(intervalId);
+    //     getAdafruitIOData("temperature", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
+    //         .then((res) =>{
+    //             console.log(res);
+    //             for (let i = 0; i < res.length; i++) {
+    //                 data_temp = [+res[i].value, ...data_temp];
+    //             }
+    //             console.log(data_temp);
+    //             draw_chart(data_temp);
+    //         })
     }, []);
     // data_temp = [12,25,32,26,40,50,46,31];
     // data_temp = [30, ...data_temp];

@@ -30,13 +30,13 @@ export default function App() {
             screenOptions={{
               headerShown: false,
             }}>
-            <Stack.Screen name="Signup" component={Signup} />
+            {/* <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="Login" component={Login} options={{ gestureEnabled: false }} />
-            <Stack.Screen name="Home" component={Home} options={{ gestureEnabled: false }} />
+            <Stack.Screen name="Home" component={Home} options={{ gestureEnabled: false }} /> */}
             <Stack.Screen name="Statistic" component={Statistic} options={{ gestureEnabled: false }} />
-            <Stack.Screen name="Setting">
+            {/* <Stack.Screen name="Setting">
               {props => <Setting {...props} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />}
-            </Stack.Screen>
+            </Stack.Screen> */}
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
