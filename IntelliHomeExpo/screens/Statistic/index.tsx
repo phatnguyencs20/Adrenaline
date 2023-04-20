@@ -3,7 +3,7 @@ import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
 import { getAdafruitIOData } from '../../utils/api';
-
+const color_code = "#7403C8";
 const Statistic = () => {
     // const [label, setLabel] = useState([]);
     const [temperature, setTemper] = useState(<></>);
@@ -25,20 +25,20 @@ const Statistic = () => {
                 yAxisSuffix=" C"
                 yAxisInterval={9} // optional, defaults to 1
                 chartConfig={{
-                backgroundColor: "#AB5AE0",
-                backgroundGradientFrom: "#B589FA",
-                backgroundGradientTo: "#610DE2",
+                backgroundColor: color_code,
+                backgroundGradientFrom: color_code,
+                backgroundGradientTo: color_code,
                 decimalPlaces: 2, // optional, defaults to 2dp
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 style: {
                     borderRadius: 16
                 },
-                propsForDots: {
-                    r: "6",
-                    strokeWidth: "2",
-                    stroke: "#ffa726"
-                }
+                // propsForDots: {
+                //     r: "1",
+                //     strokeWidth: "2",
+                //     stroke: "#ffa726"
+                // }
                 }}
                 style={{
                 marginVertical: 8,
@@ -65,20 +65,20 @@ const Statistic = () => {
                 yAxisSuffix=" %"
                 yAxisInterval={9} // optional, defaults to 1
                 chartConfig={{
-                backgroundColor: "#AB5AE0",
-                backgroundGradientFrom: "#B589FA",
-                backgroundGradientTo: "#610DE2",
+                backgroundColor: color_code,
+                backgroundGradientFrom: color_code,
+                backgroundGradientTo: color_code,
                 decimalPlaces: 2, // optional, defaults to 2dp
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 style: {
                     borderRadius: 16
                 },
-                propsForDots: {
-                    r: "6",
-                    strokeWidth: "2",
-                    stroke: "#ffa726"
-                }
+                // propsForDots: {
+                //     r: "1",
+                //     strokeWidth: "2",
+                //     stroke: "#ffa726"
+                // }
                 }}
                 style={{
                 marginVertical: 8,
@@ -87,16 +87,23 @@ const Statistic = () => {
             />
         )
     }
-
+    const limit = 20;
     let data_temp: number[] = [];
     let data_humid: number[] = [];
     useEffect(()=>{
         const intervalId = setInterval(() => {
             getAdafruitIOData("temperature", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
                 .then((res) =>{
-                    data_temp = [...data_temp, +res[0].value];
-                    if (data_temp.length >7) {
-                        data_temp.splice(0);
+                    if (data_temp.length ==0){
+                        for (let i = 0; i < res.length; i++) {
+                            data_temp = [+res[i].value, ...data_temp];
+                        }
+                    }
+                    else {
+                        data_temp = [...data_temp, +res[0].value];
+                        if (data_temp.length >limit) {
+                            data_temp.splice(0,1);
+                        }
                     }
                     console.log(data_temp);
                     draw_temper(data_temp);
@@ -104,9 +111,16 @@ const Statistic = () => {
                 .catch(err => {console.log(err)});
             getAdafruitIOData("humidity", "phatnt", "aio_xVna17f5ZfmsGHob3HMGeZ7dryiT")
                 .then((res) =>{
-                    data_humid = [...data_humid, +res[0].value];
-                    if (data_humid.length >7) {
-                        data_humid.splice(0);
+                    if (data_humid.length ==0){
+                        for (let i = 0; i < res.length; i++) {
+                            data_humid = [+res[i].value, ...data_humid];
+                        }
+                    }
+                    else {
+                        data_humid = [...data_humid, +res[0].value];
+                        if (data_humid.length >limit) {
+                            data_humid.splice(0,1);
+                        }
                     }
                     console.log(data_humid);
                     draw_humid(data_humid);
