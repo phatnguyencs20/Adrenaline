@@ -9,7 +9,7 @@ import Signup from "./screens/Signup";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Setting from "./screens/Setting";
-import Statistic from './screens/Statistic';
+import Statistic from './components/Statistic';
 
 const Stack = createNativeStackNavigator();
 
