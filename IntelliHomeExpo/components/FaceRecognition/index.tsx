@@ -75,9 +75,9 @@ const FaceRecognition = () => {
       >
       </Camera>
       <View style={styles.buttonsContainer}>
-        <Button mode='contained' onPress={takePicture} style={styles.button}><FontAwesome name="camera" size={15} color="white" />Take</Button>
-        <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}><MaterialCommunityIcons name="camera-flip" size={19} color="white" />Flip</Button>
-        <Button mode='contained' onPress={predictImage} style={styles.button}>Predict</Button>
+        <Button mode='contained' onPress={takePicture} style={styles.button}><FontAwesome name="camera" size={15} /></Button>
+        <Button mode='contained' onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)} style={styles.button}><MaterialCommunityIcons name="camera-flip" size={19} /></Button>
+        <Button mode='contained' onPress={predictImage} style={styles.button}><FontAwesome name="users" size={15} /></Button>
       </View>
 
       <Snackbar

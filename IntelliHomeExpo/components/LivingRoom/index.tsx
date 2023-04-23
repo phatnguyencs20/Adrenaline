@@ -86,8 +86,8 @@ const LivingRoom = () => {
     }, []);
 
 
-    console.log('Fan speed:', fanSpeed);
-    console.log('Mode:', autoMode);
+    // console.log('Fan speed:', fanSpeed);
+    // console.log('Mode:', autoMode);
     return (
         <View style={styles.container}>
             {/* Fan card */}

@@ -6,7 +6,7 @@ import { sendToAdafruitIOFeed } from "../../utils/api";
 import { model } from "../../utils/coreML";
 
 const FanSwitch = ({ autoMode, predictedFanSpeed, temp, humid }) => {
-  const [manualFanSpeed, setManualFanSpeed] = React.useState(0);
+  const [manualFanSpeed, setManualFanSpeed] = React.useState(1);
   const fanSpeed = autoMode ? predictedFanSpeed : manualFanSpeed;
   const addModelData = (temp, humid, fanSpeed) => {
     model.updateKnowledge([temp, humid, fanSpeed]);
