@@ -6,7 +6,7 @@ import { List, Divider, Button, useTheme } from 'react-native-paper';
 import { logout } from '../../store';
 import { useDispatch } from 'react-redux';
 
-const SettingsScreen = ({navigation, isDarkMode, setIsDarkMode }: {navigation: any; isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) => {
+const SettingsScreen = ({ navigation, isDarkMode, setIsDarkMode }: { navigation: any; isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) => {
     const { colors } = useTheme();
 
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const SettingsScreen = ({navigation, isDarkMode, setIsDarkMode }: {navigation: a
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-            <List.Section style={{ marginTop: 10}}>
+            <List.Section style={{ marginTop: 10 }}>
                 <List.Subheader>Account</List.Subheader>
                 <List.Item
                     title="Change Password"

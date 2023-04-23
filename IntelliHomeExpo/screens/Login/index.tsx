@@ -8,7 +8,7 @@ import Welcome from '../../components/Welcome';
 import { getUserDataFromApi } from '../../utils/api';
 
 function LoginPage({ navigation }: any) {
-    const { colors } = useTheme();
+    const { colors, dark } = useTheme();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
