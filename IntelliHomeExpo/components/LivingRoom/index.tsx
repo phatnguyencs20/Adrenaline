@@ -84,6 +84,8 @@ const LivingRoom = () => {
         }, 5000);
         return () => clearInterval(intervalId);
     }, []);
+
+
     console.log('Fan speed:', fanSpeed);
     console.log('Mode:', autoMode);
     return (
@@ -112,7 +114,15 @@ const LivingRoom = () => {
                         left={() => <List.Icon icon="robot-outline" />}
                         right={() => <ModeSwitch autoMode={autoMode} setAutoMode={setAutoMode} />}
                     />
-                    <FanSwitch autoMode={autoMode} predictedFanSpeed={fanSpeed} temp={Number(temperature)} humid={Number(humidity)}/>
+                    
+                    <FanSwitch autoMode={autoMode} predictedFanSpeed={fanSpeed} temp={Number(temperature)} humid={Number(humidity)} />
+                    {/* {autoMode === false && <FanSwitch autoMode={autoMode} predictedFanSpeed={fanSpeed} temp={Number(temperature)} humid={Number(humidity)} />}
+                    {autoMode === true &&
+                        <View>
+                            <Text style={styles.cardText}>KNN-predicted fan speed: {fanSpeed}</Text>
+                        </View>
+                    } */}
+
                 </List.Section>
             </Card>
 
@@ -130,11 +140,6 @@ const LivingRoom = () => {
                         left={() => <List.Icon icon="lightbulb-variant-outline" />}
                         right={() => <LightSwitch />}
                     />
-                    {/* <List.Item
-                title="Light 3"
-                left={() => <List.Icon icon="lightbulb-variant-outline" />}
-                right={() => <LightSwitch />}
-              /> */}
                 </List.Section>
             </Card>
         </View>
