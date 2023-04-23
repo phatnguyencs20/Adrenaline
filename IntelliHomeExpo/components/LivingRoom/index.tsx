@@ -27,7 +27,7 @@ const LivingRoom = () => {
     const AIOKey = user.adafruitIOKey;
     const [temperature, setTemperature] = useState('');
     const [humidity, setHumidity] = useState('');
-    const [autoMode, setAutoMode] = useState(false);
+    const [autoMode, setAutoMode] = useState(true);
     // const [currentFs, setcurrentFs] = useState(0);
     const [fanSpeed, setFanSpeed] = useState(0);
 
