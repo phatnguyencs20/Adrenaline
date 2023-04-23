@@ -20,7 +20,7 @@ while True:
     # Calculate the temperature and humidity values based on sine and cosine curves, respectively
     elapsed_time = time.time() - start_time
     temperature = round(temperature_init + 10.0 * math.sin(elapsed_time / 60.0), 2)
-    humidity = round(humidity_init + 20.0 * math.cos(elapsed_time / 60.0), 2)
+    humidity = round(humidity_init + 40.0 * math.cos(elapsed_time / 60.0), 2)
 
     # Create the data payloads for the Adafruit feeds
     temperature_data = {'value': temperature, 'unit': TEMPERATURE_UNIT}
