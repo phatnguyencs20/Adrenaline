@@ -81,7 +81,7 @@ const LivingRoom = () => {
                 }
                 predict();
             }
-        }, 5000);
+        }, 10_000);
         return () => clearInterval(intervalId);
     }, []);
 
