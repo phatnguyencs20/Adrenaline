@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 
 # Load image
-img = cv2.imread('./data/test/TIN/20230413_162149.jpg')
+img = cv2.imread('/Users/phatnt/Documents/Adrenaline/CoreML/data/test/UNKNOWN/z4272001724783_acab67c5ced6f5ce18fd37cc58bb4104.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # Encode image to base64 string

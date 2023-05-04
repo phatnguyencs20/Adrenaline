@@ -5,6 +5,7 @@ from io import BytesIO
 from PIL import Image
 import numpy as np
 import base64
+from tensorflow.keras.applications.vgg16 import preprocess_input
 
 app = Flask(__name__)
 
@@ -20,7 +21,8 @@ def predict():
 
     # Preprocess the image if necessary
     img_pil = img_pil.resize((224, 224))
-    img_array = np.array(img_pil) / 255.0
+    img_array = np.array(img_pil)
+    img_array = preprocess_input(img_array)
     img_array = np.expand_dims(img_array, axis=0)
 
     # Make predictions
