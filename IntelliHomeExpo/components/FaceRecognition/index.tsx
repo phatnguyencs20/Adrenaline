@@ -59,7 +59,12 @@ const FaceRecognition = () => {
   const predictImage = async () => {
     if (image) {
       const prediction = await sendPredictionRequest(image);
-      const message = 'Class ' + prediction + '!';
+      let message = '';
+      if (Number(prediction) === 0) {
+        message = 'Welcome back, Tin!';
+      } else {
+        message = 'Ohh, seem like you are not Tin!';
+      }
       setSnackbarMessage(message);
       setSnackbarVisible(true);
       console.log(prediction); // Display the prediction

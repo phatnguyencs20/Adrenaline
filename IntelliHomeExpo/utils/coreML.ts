@@ -91,7 +91,7 @@ const convertImageToBase64 = async (imageUri: string): Promise<string> => {
 // Define function to send post request to Flask API
 const sendPredictionRequest = async (imageUri: string): Promise<number> => {
     const base64Image = await convertImageToBase64(imageUri);
-    const response: AxiosResponse<number> = await axios.post('http://192.168.1.10:8000/predict', { image: base64Image });
+    const response: AxiosResponse<number> = await axios.post('http://192.168.31.209:8000/predict', { image: base64Image });
     return response.data;
 };
 

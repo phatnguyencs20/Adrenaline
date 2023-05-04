@@ -44,4 +44,4 @@ while True:
           'Temperature:', temperature, TEMPERATURE_UNIT)
     print('Humidity Response:', humidity_response.status_code,
           'Humidity:', humidity, HUMIDITY_UNIT)
-    time.sleep(3)
+    time.sleep(5)
